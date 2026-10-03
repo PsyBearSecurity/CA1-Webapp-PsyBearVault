@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Note - PsyBear Secure Vault</title>
+
+</head>
+
+<body style="text-align: center;">
+
+    <img src="{{ url_for('static', filename='psybear-black-hoody.png') }}"
+         alt="PsyBear Security Logo"
+         style="display: block; margin: 20px auto; width: 180px;">
+
+    <h1>Create Secure Note</h1>
+
+    <form method="POST" action="/create-note">
+
+        <p>
+            <label for="title">Title:</label><br>
+
+            <input type="text"
+                   id="title"
+                   name="title"
+                   maxlength="100"
+                   required>
+        </p>
+
+        <p>
+            <label for="content">Note:</label><br>
+
+            <textarea id="content"
+                      name="content"
+                      rows="8"
+                      cols="40"
+                      maxlength="2000"
+                      required></textarea>
+        </p>
+
+        <button type="submit">Save Note</button>
+
+    </form>
+
+    <p>
+        <a href="/dashboard">Back to Dashboard</a>
+    </p>
+
+</body>
+
+</html>

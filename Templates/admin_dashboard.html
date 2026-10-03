@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin - PsyBear Secure Vault</title>
+
+</head>
+
+<body style="text-align: center;">
+
+    <img src="{{ url_for('static', filename='psybear-black-hoody.png') }}"
+         alt="PsyBear Security Logo"
+         style="display: block; margin: 20px auto; width: 180px;">
+
+    <h1>PsyBear Secure Vault</h1>
+
+    <h2>Administrator Dashboard</h2>
+
+    <h3>User Management</h3>
+
+    <table border="1"
+           cellpadding="10"
+           style="margin: auto;">
+
+        <tr>
+
+            <th>Username</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Number of Notes</th>
+            <th>Action</th>
+
+        </tr>
+
+        {% for user in users %}
+
+        <tr>
+
+            <td>{{ user[1] }}</td>
+
+            <td>{{ user[2] }}</td>
+
+            <td>
+
+                {% if user[3] == 1 %}
+
+                    Active
+
+                {% else %}
+
+                    Disabled
+
+                {% endif %}
+
+            </td>
+
+            <td>{{ user[4] }}</td>
+
+            <td>
+
+                {% if user[2] != "admin" %}
+
+                    {% if user[3] == 1 %}
+
+                        <a href="/disable-user/{{ user[0] }}">
+                            Disable
+                        </a>
+
+                    {% else %}
+
+                        <a href="/enable-user/{{ user[0] }}">
+                            Enable
+                        </a>
+
+                    {% endif %}
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <p>
+        <a href="/logout">Logout</a>
+    </p>
+
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - PsyBear Secure Vault</title>
+
+</head>
+
+<body style="text-align: center;">
+
+    <img src="{{ url_for('static', filename='psybear-black-hoody.png') }}"
+         alt="PsyBear Security Logo"
+         style="display: block; margin: 20px auto; width: 180px;">
+
+    <h1>PsyBear Secure Vault</h1>
+
+    <h2>Welcome, {{ username }}</h2>
+
+    <p>You are now logged in.</p>
+
+    <p>
+        <a href="/create-note">Create New Note</a>
+    </p>
+
+    <hr>
+
+    <h2>Your Notes</h2>
+
+    {% if notes %}
+
+        {% for note in notes %}
+
+            <h3>{{ note[1] }}</h3>
+
+            <p>{{ note[2] }}</p>
+
+            <form method="POST"
+                  action="/delete-note/{{ note[0] }}">
+
+                <button type="submit">
+                    Delete Note
+                </button>
+
+            </form>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>You have no notes yet.</p>
+
+    {% endif %}
+
+    <p>
+        <a href="/logout">Logout</a>
+    </p>
+
+</body>
+
+</html>
