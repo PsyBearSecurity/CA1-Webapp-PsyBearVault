@@ -5,12 +5,15 @@ import os
 from flask import Flask, render_template, request, session, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 
+from flask_wtf.csrf import CSRFProtect
+
 
 app = Flask(__name__)
 
 # Temporary during development.
 # We will secure this properly before submission.
 app.secret_key = os.environ.get("SECRET_KEY")
+csrf = CSRFProtect(app)
 app.config["SESSION_COOKIE_HTTPONLY"] = True
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 
@@ -303,7 +306,7 @@ def admin_dashboard():
 # DISABLE USER
 # -------------------------------------------------
 
-@app.route("/disable-user/<int:user_id>")
+@app.route("/disable-user/<int:user_id>", methods=["POST"])
 def disable_user(user_id):
 
     if session.get("role") != "admin":
@@ -358,7 +361,7 @@ def delete_note(note_id):
 # ENABLE USER
 # -------------------------------------------------
 
-@app.route("/enable-user/<int:user_id>")
+@app.route("/enable-user/<int:user_id>", methods=["POST"])
 def enable_user(user_id):
 
     if session.get("role") != "admin":

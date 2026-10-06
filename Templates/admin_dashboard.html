@@ -69,15 +69,26 @@
 
                     {% if user[3] == 1 %}
 
-                        <a href="/disable-user/{{ user[0] }}">
+                    <form method="POST"
+                        action="/disable-user/{{ user[0] }}"
+                        style="display: inline;">
+
+                        <input type="hidden"
+                        name="csrf_token" value="{{ csrf_token() }}">
+
+                        <button type="submit">
                             Disable
-                        </a>
+                        </button>
+                    </form>
 
                     {% else %}
 
-                        <a href="/enable-user/{{ user[0] }}">
-                            Enable
-                        </a>
+                        <form method="POST" action="/enable-user/{{ user[0] }}" style="display: inline;">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit">
+                                Enable
+                            </button>
+                        </form>
 
                     {% endif %}
 
